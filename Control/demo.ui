@@ -37,9 +37,6 @@
        </property>
       </widget>
      </item>
-     <item row="2" column="0">
-      <widget class="QListView" name="InstancceListView"/>
-     </item>
      <item row="1" column="4">
       <widget class="QLabel" name="label_4">
        <property name="text">
@@ -60,9 +57,6 @@
        </property>
       </spacer>
      </item>
-     <item row="2" column="2">
-      <widget class="QListView" name="listView"/>
-     </item>
      <item row="1" column="0">
       <widget class="QLabel" name="label">
        <property name="text">
@@ -71,7 +65,7 @@
       </widget>
      </item>
      <item row="1" column="2">
-      <widget class="QLabel" name="label_2">
+      <widget class="QLabel" name="lb_RelatedArguments">
        <property name="text">
         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Related Arguments&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
@@ -92,6 +86,12 @@
      </item>
      <item row="2" column="4">
       <widget class="QListView" name="listView_2"/>
+     </item>
+     <item row="2" column="0">
+      <widget class="QListWidget" name="InstanceListView"/>
+     </item>
+     <item row="2" column="2">
+      <widget class="QListWidget" name="RelatedArgumentsView"/>
      </item>
     </layout>
    </widget>
@@ -353,7 +353,7 @@
       </layout>
      </item>
      <item row="2" column="0">
-      <widget class="QPushButton" name="AddAsInstancce">
+      <widget class="QPushButton" name="AddAsInstance">
        <property name="text">
         <string>Add As Instance</string>
        </property>

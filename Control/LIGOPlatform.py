@@ -9,19 +9,20 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import (QMainWindow, QApplication, QWidget, QPushButton, QHBoxLayout, QLineEdit)
+from PyQt5.QtWidgets import (QMainWindow, QApplication, QWidget, QPushButton, QHBoxLayout, QLineEdit, QMessageBox)
 
-argumentsTotal = {'Search': ['x', 'xx', 'yyy'], 'StartPoint': ['1', '22', '333']}
+argumentsTotal = {'Search': ['x', 'xx', 'yyy'], 'StartPoint': ['1', '22', '333', '444'],
+                  'Backoff': ['a', 'b', 'x', 'd', 'e', 'ff']}
 
 
 class Ui_LIGOPlatform(object):
     # def __init__(self):
     #     super(Ui_LIGOPlatform, self).__init__()
-
     def startUi(self, LIGOPlatform):
         self.setupUi(LIGOPlatform)
-        self.ArgValue_1.setText('testest')
         self.cb_TestMethodLib.activated.connect(self.listArguments)
+        self.AddAsInstance.clicked.connect(self.addInstance)
+        self.InstanceListView.clicked.connect(self.showRelatedArguments)
 
     def setupUi(self, LIGOPlatform):
         LIGOPlatform.setObjectName("LIGOPlatform")
@@ -38,28 +39,28 @@ class Ui_LIGOPlatform(object):
         self.InstanceList.setTextFormat(QtCore.Qt.RichText)
         self.InstanceList.setObjectName("InstanceList")
         self.lo_Instance.addWidget(self.InstanceList, 0, 0, 1, 5)
-        self.InstancceListView = QtWidgets.QListView(self.layoutWidget)
-        self.InstancceListView.setObjectName("InstancceListView")
-        self.lo_Instance.addWidget(self.InstancceListView, 2, 0, 1, 1)
         self.label_4 = QtWidgets.QLabel(self.layoutWidget)
         self.label_4.setObjectName("label_4")
         self.lo_Instance.addWidget(self.label_4, 1, 4, 1, 1)
         spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.lo_Instance.addItem(spacerItem, 2, 1, 1, 1)
-        self.listView = QtWidgets.QListView(self.layoutWidget)
-        self.listView.setObjectName("listView")
-        self.lo_Instance.addWidget(self.listView, 2, 2, 1, 1)
         self.label = QtWidgets.QLabel(self.layoutWidget)
         self.label.setObjectName("label")
         self.lo_Instance.addWidget(self.label, 1, 0, 1, 1)
-        self.label_2 = QtWidgets.QLabel(self.layoutWidget)
-        self.label_2.setObjectName("label_2")
-        self.lo_Instance.addWidget(self.label_2, 1, 2, 1, 1)
+        self.lb_RelatedArguments = QtWidgets.QLabel(self.layoutWidget)
+        self.lb_RelatedArguments.setObjectName("lb_RelatedArguments")
+        self.lo_Instance.addWidget(self.lb_RelatedArguments, 1, 2, 1, 1)
         spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.lo_Instance.addItem(spacerItem1, 2, 3, 1, 1)
         self.listView_2 = QtWidgets.QListView(self.layoutWidget)
         self.listView_2.setObjectName("listView_2")
         self.lo_Instance.addWidget(self.listView_2, 2, 4, 1, 1)
+        self.InstanceListView = QtWidgets.QListWidget(self.layoutWidget)
+        self.InstanceListView.setObjectName("InstanceListView")
+        self.lo_Instance.addWidget(self.InstanceListView, 2, 0, 1, 1)
+        self.RelatedArgumentsView = QtWidgets.QListWidget(self.layoutWidget)
+        self.RelatedArgumentsView.setObjectName("RelatedArgumentsView")
+        self.lo_Instance.addWidget(self.RelatedArgumentsView, 2, 2, 1, 1)
         self.layoutWidget1 = QtWidgets.QWidget(self.centralwidget)
         self.layoutWidget1.setGeometry(QtCore.QRect(581, 41, 321, 316))
         self.layoutWidget1.setObjectName("layoutWidget1")
@@ -190,9 +191,9 @@ class Ui_LIGOPlatform(object):
         self.Arg8.setObjectName("Arg8")
         self.ArgumentsView.addWidget(self.Arg8, 7, 0, 1, 1)
         self.lo_TestMethod.addLayout(self.ArgumentsView, 1, 0, 1, 1)
-        self.AddAsInstancce = QtWidgets.QPushButton(self.layoutWidget2)
-        self.AddAsInstancce.setObjectName("AddAsInstancce")
-        self.lo_TestMethod.addWidget(self.AddAsInstancce, 2, 0, 1, 1)
+        self.AddAsInstance = QtWidgets.QPushButton(self.layoutWidget2)
+        self.AddAsInstance.setObjectName("AddAsInstance")
+        self.lo_TestMethod.addWidget(self.AddAsInstance, 2, 0, 1, 1)
         LIGOPlatform.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(LIGOPlatform)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 1314, 26))
@@ -216,8 +217,8 @@ class Ui_LIGOPlatform(object):
                                         "<html><head/><body><p align=\"center\"><span style=\" font-weight:600;\">Flow Selection</span></p></body></html>"))
         self.label.setText(_translate("LIGOPlatform",
                                       "<html><head/><body><p align=\"center\"><span style=\" font-weight:600;\">All Available Instrances</span></p></body></html>"))
-        self.label_2.setText(_translate("LIGOPlatform",
-                                        "<html><head/><body><p align=\"center\"><span style=\" font-weight:600;\">Related Arguments</span></p></body></html>"))
+        self.lb_RelatedArguments.setText(_translate("LIGOPlatform",
+                                                    "<html><head/><body><p align=\"center\"><span style=\" font-weight:600;\">Related Arguments</span></p></body></html>"))
         self.label_5.setText(_translate("LIGOPlatform",
                                         "<html><head/><body><p align=\"center\"><span style=\" font-weight:600;\">Main</span></p><p align=\"center\"><span style=\" font-weight:600;\">Flow</span></p></body></html>"))
         self.Program.setText(_translate("LIGOPlatform",
@@ -240,18 +241,35 @@ class Ui_LIGOPlatform(object):
         self.Arg6.setText(_translate("LIGOPlatform", "Arg6"))
         self.Arg1.setText(_translate("LIGOPlatform", "Arg1"))
         self.Arg8.setText(_translate("LIGOPlatform", "Arg8"))
-        self.AddAsInstancce.setText(_translate("LIGOPlatform", "Add As Instance"))
+        self.AddAsInstance.setText(_translate("LIGOPlatform", "Add As Instance"))
 
     def listArguments(self):
         method = self.cb_TestMethodLib.currentText()
-        arguments = argumentsTotal[method]
+        try:
+            arguments = argumentsTotal[method]
+        except Exception:
+            QMessageBox.critical(self.centralwidget, 'Title',
+                                 "Test Method: %s in Combo box is not aligned with Method list" % (method),
+                                 QMessageBox.Yes | QMessageBox.No, QMessageBox.Yes)
+            # QMessageBox.critical(self, '标题', '严重错误对话框消息正文', QMessageBox.Yes | QMessageBox.No, QMessageBox.Yes)
         for index in range(len(arguments)):
             item = self.centralwidget.findChild(QLineEdit, 'ArgValue_{}'.format(index + 1))
-            if item is not None:
+            if item != None:
                 item.setText(arguments[index])
             else:
                 raise Exception("fail to get ArgValue_%d in ListArguments" % (index + 1))
         pass
 
     def addInstance(self):
+        self.InstanceListView.addItem(self.cb_TestMethodLib.currentText())
+        pass
+
+    def showRelatedArguments(self):
+        self.RelatedArgumentsView.clear()
+        selectedMethod = self.InstanceListView.currentItem().text()
+        if selectedMethod == None:
+            QMessageBox.critical(self.centralwidget, 'Title', "No test method is selected in InstanceListView",
+                                 QMessageBox.Yes | QMessageBox.No, QMessageBox.Yes)
+        else:
+            self.RelatedArgumentsView.addItems(argumentsTotal[selectedMethod])
         pass
