@@ -14,27 +14,7 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QListView" name="listView_5">
-    <property name="geometry">
-     <rect>
-      <x>1346</x>
-      <y>-208</y>
-      <width>191</width>
-      <height>131</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QListView" name="listView_7">
-    <property name="geometry">
-     <rect>
-      <x>1336</x>
-      <y>-18</y>
-      <width>161</width>
-      <height>101</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>30</x>
@@ -43,7 +23,7 @@
       <height>411</height>
      </rect>
     </property>
-    <layout class="QGridLayout" name="InstancceView">
+    <layout class="QGridLayout" name="lo_Instance">
      <item row="0" column="0" colspan="5">
       <widget class="QLabel" name="InstanceList">
        <property name="toolTip">
@@ -115,7 +95,7 @@
      </item>
     </layout>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>581</x>
@@ -124,7 +104,7 @@
       <height>316</height>
      </rect>
     </property>
-    <layout class="QGridLayout" name="gridLayout">
+    <layout class="QGridLayout" name="lo_Program">
      <item row="2" column="0">
       <widget class="QLabel" name="label_5">
        <property name="text">
@@ -177,7 +157,7 @@
      </item>
     </layout>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>80</x>
@@ -186,11 +166,11 @@
       <height>327</height>
      </rect>
     </property>
-    <layout class="QGridLayout" name="gridLayout_2">
+    <layout class="QGridLayout" name="lo_TestMethod">
      <item row="0" column="0">
       <layout class="QGridLayout" name="TestMethodView">
        <item row="1" column="0">
-        <widget class="QComboBox" name="comboBox">
+        <widget class="QComboBox" name="cb_TestMethodLib">
          <property name="styleSheet">
           <string notr="true">font: 12pt &quot;Arial&quot;;</string>
          </property>
@@ -255,7 +235,7 @@
         </widget>
        </item>
        <item row="1" column="2">
-        <widget class="QLineEdit" name="ArgDesCription_2"/>
+        <widget class="QLineEdit" name="ArgDescription_2"/>
        </item>
        <item row="1" column="0">
         <widget class="QLabel" name="Arg2">
@@ -265,19 +245,19 @@
         </widget>
        </item>
        <item row="2" column="2">
-        <widget class="QLineEdit" name="ArgDesCription_3"/>
+        <widget class="QLineEdit" name="ArgDescription_3"/>
        </item>
        <item row="6" column="4">
         <widget class="QLineEdit" name="ArgValue_7"/>
        </item>
        <item row="6" column="2">
-        <widget class="QLineEdit" name="ArgDesCription_7"/>
+        <widget class="QLineEdit" name="ArgDescription_7"/>
        </item>
        <item row="7" column="2">
-        <widget class="QLineEdit" name="ArgDesCription_8"/>
+        <widget class="QLineEdit" name="ArgDescription_8"/>
        </item>
        <item row="3" column="2">
-        <widget class="QLineEdit" name="ArgDesCription_4"/>
+        <widget class="QLineEdit" name="ArgDescription_4"/>
        </item>
        <item row="2" column="4">
         <widget class="QLineEdit" name="ArgValue_3"/>
@@ -286,7 +266,7 @@
         <widget class="QLineEdit" name="ArgValue_2"/>
        </item>
        <item row="4" column="2">
-        <widget class="QLineEdit" name="ArgDesCription_5"/>
+        <widget class="QLineEdit" name="ArgDescription_5"/>
        </item>
        <item row="3" column="4">
         <widget class="QLineEdit" name="ArgValue_4"/>
@@ -312,13 +292,13 @@
         </widget>
        </item>
        <item row="0" column="4">
-        <widget class="QLineEdit" name="ArgValue"/>
+        <widget class="QLineEdit" name="ArgValue_1"/>
        </item>
        <item row="4" column="4">
         <widget class="QLineEdit" name="ArgValue_5"/>
        </item>
        <item row="5" column="2">
-        <widget class="QLineEdit" name="ArgDesCription_6"/>
+        <widget class="QLineEdit" name="ArgDescription_6"/>
        </item>
        <item row="0" column="3">
         <spacer name="horizontalSpacer_2">
@@ -361,7 +341,7 @@
         </widget>
        </item>
        <item row="0" column="2">
-        <widget class="QLineEdit" name="ArgDesCription"/>
+        <widget class="QLineEdit" name="ArgDescription_1"/>
        </item>
        <item row="7" column="0">
         <widget class="QLabel" name="Arg8">
