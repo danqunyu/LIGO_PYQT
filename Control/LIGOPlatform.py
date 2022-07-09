@@ -9,10 +9,11 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import (QMainWindow, QApplication, QWidget, QPushButton, QHBoxLayout, QLineEdit, QMessageBox)
+from PyQt5.QtWidgets import (QMainWindow, QApplication, QWidget, QPushButton, QHBoxLayout, QLineEdit, QMessageBox,QFileDialog)
+import pandas as pd
 
-argumentsTotal = {'Search': ['x', 'xx', 'yyy'], 'StartPoint': ['1', '22', '333', '444'],
-                  'Backoff': ['a', 'b', 'x', 'd', 'e', 'ff']}
+description = {'Search': ['x', 'xx', 'yyy'], 'StartPoint': ['1', '22', '333', '444'],
+               'Backoff': ['a', 'b', 'x', 'd', 'e', 'ff']}
 
 
 class Ui_LIGOPlatform(object):
@@ -23,6 +24,8 @@ class Ui_LIGOPlatform(object):
         self.cb_TestMethodLib.activated.connect(self.listArguments)
         self.AddAsInstance.clicked.connect(self.addInstance)
         self.InstanceListView.clicked.connect(self.showRelatedArguments)
+
+        self.pb_ConfigFile.clicked.connect(self.openfile)
 
     def setupUi(self, LIGOPlatform):
         LIGOPlatform.setObjectName("LIGOPlatform")
@@ -194,6 +197,12 @@ class Ui_LIGOPlatform(object):
         self.AddAsInstance = QtWidgets.QPushButton(self.layoutWidget2)
         self.AddAsInstance.setObjectName("AddAsInstance")
         self.lo_TestMethod.addWidget(self.AddAsInstance, 2, 0, 1, 1)
+        self.pb_ConfigFile = QtWidgets.QPushButton(self.centralwidget)
+        self.pb_ConfigFile.setGeometry(QtCore.QRect(580, 0, 161, 28))
+        self.pb_ConfigFile.setObjectName("pb_ConfigFile")
+        self.le_ConfigFile = QtWidgets.QLineEdit(self.centralwidget)
+        self.le_ConfigFile.setGeometry(QtCore.QRect(760, 0, 271, 31))
+        self.le_ConfigFile.setObjectName("le_ConfigFile")
         LIGOPlatform.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(LIGOPlatform)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 1314, 26))
@@ -209,30 +218,20 @@ class Ui_LIGOPlatform(object):
     def retranslateUi(self, LIGOPlatform):
         _translate = QtCore.QCoreApplication.translate
         LIGOPlatform.setWindowTitle(_translate("LIGOPlatform", "MainWindow"))
-        self.InstanceList.setToolTip(_translate("LIGOPlatform",
-                                                "<html><head/><body><p><span style=\" font-size:14pt; font-weight:600;\">Instance List &amp; Arguments</span></p></body></html>"))
-        self.InstanceList.setText(_translate("LIGOPlatform",
-                                             "<html><head/><body><p align=\"center\"><span style=\" font-size:14pt; font-weight:600; color:#5555ff;\">Instance List &amp; Arguments &amp; Flow Generation</span></p></body></html>"))
-        self.label_4.setText(_translate("LIGOPlatform",
-                                        "<html><head/><body><p align=\"center\"><span style=\" font-weight:600;\">Flow Selection</span></p></body></html>"))
-        self.label.setText(_translate("LIGOPlatform",
-                                      "<html><head/><body><p align=\"center\"><span style=\" font-weight:600;\">All Available Instrances</span></p></body></html>"))
-        self.lb_RelatedArguments.setText(_translate("LIGOPlatform",
-                                                    "<html><head/><body><p align=\"center\"><span style=\" font-weight:600;\">Related Arguments</span></p></body></html>"))
-        self.label_5.setText(_translate("LIGOPlatform",
-                                        "<html><head/><body><p align=\"center\"><span style=\" font-weight:600;\">Main</span></p><p align=\"center\"><span style=\" font-weight:600;\">Flow</span></p></body></html>"))
-        self.Program.setText(_translate("LIGOPlatform",
-                                        "<html><head/><body><p align=\"center\"><span style=\" font-size:14pt; font-weight:600; color:#ff00ff;\">Final Program</span></p></body></html>"))
-        self.label_3.setText(_translate("LIGOPlatform",
-                                        "<html><head/><body><p align=\"center\"><span style=\" font-weight:600;\">Dynamic</span></p><p align=\"center\"><span style=\" font-weight:600;\">Preload</span></p></body></html>"))
-        self.label_6.setText(_translate("LIGOPlatform",
-                                        "<html><head/><body><p align=\"center\"><span style=\" font-weight:600;\">Unload</span></p></body></html>"))
+        self.InstanceList.setToolTip(_translate("LIGOPlatform", "<html><head/><body><p><span style=\" font-size:14pt; font-weight:600;\">Instance List &amp; Arguments</span></p></body></html>"))
+        self.InstanceList.setText(_translate("LIGOPlatform", "<html><head/><body><p align=\"center\"><span style=\" font-size:14pt; font-weight:600; color:#5555ff;\">Instance List &amp; Arguments &amp; Flow Generation</span></p></body></html>"))
+        self.label_4.setText(_translate("LIGOPlatform", "<html><head/><body><p align=\"center\"><span style=\" font-weight:600;\">Flow Selection</span></p></body></html>"))
+        self.label.setText(_translate("LIGOPlatform", "<html><head/><body><p align=\"center\"><span style=\" font-weight:600;\">All Available Instrances</span></p></body></html>"))
+        self.lb_RelatedArguments.setText(_translate("LIGOPlatform", "<html><head/><body><p align=\"center\"><span style=\" font-weight:600;\">Related Arguments</span></p></body></html>"))
+        self.label_5.setText(_translate("LIGOPlatform", "<html><head/><body><p align=\"center\"><span style=\" font-weight:600;\">Main</span></p><p align=\"center\"><span style=\" font-weight:600;\">Flow</span></p></body></html>"))
+        self.Program.setText(_translate("LIGOPlatform", "<html><head/><body><p align=\"center\"><span style=\" font-size:14pt; font-weight:600; color:#ff00ff;\">Final Program</span></p></body></html>"))
+        self.label_3.setText(_translate("LIGOPlatform", "<html><head/><body><p align=\"center\"><span style=\" font-weight:600;\">Dynamic</span></p><p align=\"center\"><span style=\" font-weight:600;\">Preload</span></p></body></html>"))
+        self.label_6.setText(_translate("LIGOPlatform", "<html><head/><body><p align=\"center\"><span style=\" font-weight:600;\">Unload</span></p></body></html>"))
         self.cb_TestMethodLib.setItemText(0, _translate("LIGOPlatform", "Search"))
         self.cb_TestMethodLib.setItemText(1, _translate("LIGOPlatform", "StartPoint"))
         self.cb_TestMethodLib.setItemText(2, _translate("LIGOPlatform", "Backoff"))
         self.cb_TestMethodLib.setItemText(3, _translate("LIGOPlatform", "LimitLine"))
-        self.TestMethodLib.setText(_translate("LIGOPlatform",
-                                              "<html><head/><body><p><span style=\" font-size:14pt; font-weight:600; color:#55aa00;\">Test Method Lib</span></p></body></html>"))
+        self.TestMethodLib.setText(_translate("LIGOPlatform", "<html><head/><body><p><span style=\" font-size:14pt; font-weight:600; color:#55aa00;\">Test Method Lib</span></p></body></html>"))
         self.Arg3.setText(_translate("LIGOPlatform", "Arg3"))
         self.Arg4.setText(_translate("LIGOPlatform", "Arg4"))
         self.Arg2.setText(_translate("LIGOPlatform", "Arg2"))
@@ -242,11 +241,13 @@ class Ui_LIGOPlatform(object):
         self.Arg1.setText(_translate("LIGOPlatform", "Arg1"))
         self.Arg8.setText(_translate("LIGOPlatform", "Arg8"))
         self.AddAsInstance.setText(_translate("LIGOPlatform", "Add As Instance"))
+        self.pb_ConfigFile.setText(_translate("LIGOPlatform", "Open Config File"))
+
 
     def listArguments(self):
         method = self.cb_TestMethodLib.currentText()
         try:
-            arguments = argumentsTotal[method]
+            arguments = description[method]
         except Exception:
             QMessageBox.critical(self.centralwidget, 'Title',
                                  "Test Method: %s in Combo box is not aligned with Method list" % (method),
@@ -271,5 +272,13 @@ class Ui_LIGOPlatform(object):
             QMessageBox.critical(self.centralwidget, 'Title', "No test method is selected in InstanceListView",
                                  QMessageBox.Yes | QMessageBox.No, QMessageBox.Yes)
         else:
-            self.RelatedArgumentsView.addItems(argumentsTotal[selectedMethod])
+            self.RelatedArgumentsView.addItems(description[selectedMethod])
+        pass
+
+    def openfile(self):
+        filePath, fileType = QFileDialog.getOpenFileName(parent=None, caption='Open Config File', directory='', filter='Excel files(*.xlsx , *.xls)')
+        self.le_ConfigFile.setText(filePath)
+
+    def configExcel(self, configExcel, sheetName):
+        return pd.read_excel(configExcel, sheet_name=sheetName, Keep_default_na=False)
         pass
