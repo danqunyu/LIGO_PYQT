@@ -9,11 +9,12 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import (QMainWindow, QApplication, QWidget, QPushButton, QHBoxLayout, QLineEdit, QMessageBox,QFileDialog)
+from PyQt5.QtWidgets import (QMainWindow, QApplication, QWidget, QPushButton, QHBoxLayout, QLineEdit, QMessageBox,
+                             QFileDialog)
 import pandas as pd
 
-description = {'Search': ['x', 'xx', 'yyy'], 'StartPoint': ['1', '22', '333', '444'],
-               'Backoff': ['a', 'b', 'x', 'd', 'e', 'ff']}
+description = {}
+softbins = []
 
 
 class Ui_LIGOPlatform(object):
@@ -21,11 +22,13 @@ class Ui_LIGOPlatform(object):
     #     super(Ui_LIGOPlatform, self).__init__()
     def startUi(self, LIGOPlatform):
         self.setupUi(LIGOPlatform)
-        self.cb_TestMethodLib.activated.connect(self.listArguments)
-        self.AddAsInstance.clicked.connect(self.addInstance)
-        self.InstanceListView.clicked.connect(self.showRelatedArguments)
 
         self.pb_ConfigFile.clicked.connect(self.openfile)
+
+        self.cb_TestMethodLib.activated.connect(self.listArguments)
+
+        self.AddAsInstance.clicked.connect(self.addInstance)
+        self.InstanceListView.clicked.connect(self.showRelatedArguments)
 
     def setupUi(self, LIGOPlatform):
         LIGOPlatform.setObjectName("LIGOPlatform")
@@ -218,20 +221,30 @@ class Ui_LIGOPlatform(object):
     def retranslateUi(self, LIGOPlatform):
         _translate = QtCore.QCoreApplication.translate
         LIGOPlatform.setWindowTitle(_translate("LIGOPlatform", "MainWindow"))
-        self.InstanceList.setToolTip(_translate("LIGOPlatform", "<html><head/><body><p><span style=\" font-size:14pt; font-weight:600;\">Instance List &amp; Arguments</span></p></body></html>"))
-        self.InstanceList.setText(_translate("LIGOPlatform", "<html><head/><body><p align=\"center\"><span style=\" font-size:14pt; font-weight:600; color:#5555ff;\">Instance List &amp; Arguments &amp; Flow Generation</span></p></body></html>"))
-        self.label_4.setText(_translate("LIGOPlatform", "<html><head/><body><p align=\"center\"><span style=\" font-weight:600;\">Flow Selection</span></p></body></html>"))
-        self.label.setText(_translate("LIGOPlatform", "<html><head/><body><p align=\"center\"><span style=\" font-weight:600;\">All Available Instrances</span></p></body></html>"))
-        self.lb_RelatedArguments.setText(_translate("LIGOPlatform", "<html><head/><body><p align=\"center\"><span style=\" font-weight:600;\">Related Arguments</span></p></body></html>"))
-        self.label_5.setText(_translate("LIGOPlatform", "<html><head/><body><p align=\"center\"><span style=\" font-weight:600;\">Main</span></p><p align=\"center\"><span style=\" font-weight:600;\">Flow</span></p></body></html>"))
-        self.Program.setText(_translate("LIGOPlatform", "<html><head/><body><p align=\"center\"><span style=\" font-size:14pt; font-weight:600; color:#ff00ff;\">Final Program</span></p></body></html>"))
-        self.label_3.setText(_translate("LIGOPlatform", "<html><head/><body><p align=\"center\"><span style=\" font-weight:600;\">Dynamic</span></p><p align=\"center\"><span style=\" font-weight:600;\">Preload</span></p></body></html>"))
-        self.label_6.setText(_translate("LIGOPlatform", "<html><head/><body><p align=\"center\"><span style=\" font-weight:600;\">Unload</span></p></body></html>"))
+        self.InstanceList.setToolTip(_translate("LIGOPlatform",
+                                                "<html><head/><body><p><span style=\" font-size:14pt; font-weight:600;\">Instance List &amp; Arguments</span></p></body></html>"))
+        self.InstanceList.setText(_translate("LIGOPlatform",
+                                             "<html><head/><body><p align=\"center\"><span style=\" font-size:14pt; font-weight:600; color:#5555ff;\">Instance List &amp; Arguments &amp; Flow Generation</span></p></body></html>"))
+        self.label_4.setText(_translate("LIGOPlatform",
+                                        "<html><head/><body><p align=\"center\"><span style=\" font-weight:600;\">Flow Selection</span></p></body></html>"))
+        self.label.setText(_translate("LIGOPlatform",
+                                      "<html><head/><body><p align=\"center\"><span style=\" font-weight:600;\">All Available Instrances</span></p></body></html>"))
+        self.lb_RelatedArguments.setText(_translate("LIGOPlatform",
+                                                    "<html><head/><body><p align=\"center\"><span style=\" font-weight:600;\">Related Arguments</span></p></body></html>"))
+        self.label_5.setText(_translate("LIGOPlatform",
+                                        "<html><head/><body><p align=\"center\"><span style=\" font-weight:600;\">Main</span></p><p align=\"center\"><span style=\" font-weight:600;\">Flow</span></p></body></html>"))
+        self.Program.setText(_translate("LIGOPlatform",
+                                        "<html><head/><body><p align=\"center\"><span style=\" font-size:14pt; font-weight:600; color:#ff00ff;\">Final Program</span></p></body></html>"))
+        self.label_3.setText(_translate("LIGOPlatform",
+                                        "<html><head/><body><p align=\"center\"><span style=\" font-weight:600;\">Dynamic</span></p><p align=\"center\"><span style=\" font-weight:600;\">Preload</span></p></body></html>"))
+        self.label_6.setText(_translate("LIGOPlatform",
+                                        "<html><head/><body><p align=\"center\"><span style=\" font-weight:600;\">Unload</span></p></body></html>"))
         self.cb_TestMethodLib.setItemText(0, _translate("LIGOPlatform", "Search"))
         self.cb_TestMethodLib.setItemText(1, _translate("LIGOPlatform", "StartPoint"))
         self.cb_TestMethodLib.setItemText(2, _translate("LIGOPlatform", "Backoff"))
         self.cb_TestMethodLib.setItemText(3, _translate("LIGOPlatform", "LimitLine"))
-        self.TestMethodLib.setText(_translate("LIGOPlatform", "<html><head/><body><p><span style=\" font-size:14pt; font-weight:600; color:#55aa00;\">Test Method Lib</span></p></body></html>"))
+        self.TestMethodLib.setText(_translate("LIGOPlatform",
+                                              "<html><head/><body><p><span style=\" font-size:14pt; font-weight:600; color:#55aa00;\">Test Method Lib</span></p></body></html>"))
         self.Arg3.setText(_translate("LIGOPlatform", "Arg3"))
         self.Arg4.setText(_translate("LIGOPlatform", "Arg4"))
         self.Arg2.setText(_translate("LIGOPlatform", "Arg2"))
@@ -243,6 +256,22 @@ class Ui_LIGOPlatform(object):
         self.AddAsInstance.setText(_translate("LIGOPlatform", "Add As Instance"))
         self.pb_ConfigFile.setText(_translate("LIGOPlatform", "Open Config File"))
 
+    # 打开使用预配置文件，配置Combox需要的item与softbin需要的Item
+    def openfile(self):
+        filePath, fileType = QFileDialog.getOpenFileName(parent=None, caption='Open Config File', directory='',
+                                                         filter='Excel files(*.xlsx , *.xls)')
+        self.le_ConfigFile.setText(filePath)
+        df_TM = pd.read_excel(filePath, sheet_name="TestMethod", Keep_default_na=False)
+        df_SB = pd.read_excel(filePath, sheet_name="SoftBin", Keep_default_na=False)
+
+        methods = df_TM['TestMethod'].values.tolist()
+        for item in methods:
+            description[item] = df_TM.loc[df_TM["TestMethod"] == item, ['Arg0']].values.tolist()
+            pass
+        description2 = dict(zip(df_TM['TestMethod'], df_TM['Arg0']))
+        self.cb_TestMethodLib.addItems(methods)
+
+        softbins = dict(zip(df_SB['SodtBin'],df_SB['HardBin']))
 
     def listArguments(self):
         method = self.cb_TestMethodLib.currentText()
@@ -274,10 +303,6 @@ class Ui_LIGOPlatform(object):
         else:
             self.RelatedArgumentsView.addItems(description[selectedMethod])
         pass
-
-    def openfile(self):
-        filePath, fileType = QFileDialog.getOpenFileName(parent=None, caption='Open Config File', directory='', filter='Excel files(*.xlsx , *.xls)')
-        self.le_ConfigFile.setText(filePath)
 
     def configExcel(self, configExcel, sheetName):
         return pd.read_excel(configExcel, sheet_name=sheetName, Keep_default_na=False)
